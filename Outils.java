@@ -18,7 +18,7 @@ public class Outils {
 		return formatter.format(new java.util.Date());
 	}
 
-	static boolean isNumeric(String mot) {
+	public static boolean isNumeric(String mot) {
 		if (mot.charAt(0) == '-')
 			mot = mot.substring(1);
 		return mot.chars().allMatch(x -> Character.isDigit(x));
@@ -29,34 +29,42 @@ public class Outils {
 //		return true;
 	}
 
-	static boolean isNumericRegEx(String mot) {
+	public static boolean isNumericRegEx(String mot) {
 		String regexNum = "-{0,1}(?!0)\\d+";
 		return mot.matches(regexNum);
 	}
 
-	static ArrayList<String> toArray(String[] tabStr) {
+	public static ArrayList<String> toArray(String[] tabStr) {
 		return new ArrayList<String>(Arrays.asList(tabStr));
 	}
 
-	static ArrayList<Integer> toArray(Integer[] tabInt) {
+	public static ArrayList<Integer> toArray(Integer[] tabInt) {
 		return new ArrayList<Integer>(Arrays.asList(tabInt));
 	}
 
-	static void listerEnvVar() {
+	public static Integer getFirstCharAsciiCode(String mot) {
+		return (int) (mot.charAt(0));
+	}
+
+	public static Character getCharFromAsciiCode(int asciiCode) {
+		return (char) asciiCode;
+	}
+
+	public static void listerEnvVar() {
 		Map<String, String> env = System.getenv();
 		for (String envName : env.keySet()) {
 			System.out.format("%s=%s%n", envName, env.get(envName));
 		}
 	}
 
-	static String getDeskTopPath() {
+	public static String getDeskTopPath() {
 //	String oneDrivePath=System.getenv("OneDrive");
 		File dirRoot = new File(
 				System.getProperty("user.home") + File.separator + "OneDrive" + File.separator + "Bureau");
 		return dirRoot.getPath();
 	}
 
-	static void readFileToConsole(File monFile) {
+	public static void readFileToConsole(File monFile) {
 		try {
 			if (monFile.exists()) {
 				BufferedReader reader = new BufferedReader(
@@ -75,7 +83,7 @@ public class Outils {
 		}
 	}
 
-	static void writeToFile(File monFile, ArrayList<String> data) {
+	public static void writeToFile(File monFile, ArrayList<String> data) {
 		try {
 			if (!monFile.exists())
 				monFile.createNewFile();

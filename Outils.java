@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,10 +86,12 @@ public class Outils {
 
 	public static void writeToFile(File monFile, ArrayList<String> data) {
 		try {
+			if (! monFile.getParentFile().exists()) 
+				monFile.getParentFile().mkdir();	
 			if (!monFile.exists())
 				monFile.createNewFile();
 
-			FileWriter writer = new FileWriter(monFile);
+			FileWriter writer = new FileWriter(monFile, Charset.forName("UTF-8"));
 			BufferedWriter bwriter = new BufferedWriter(writer);
 
 			for (String elt : data) {
